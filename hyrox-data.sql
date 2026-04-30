@@ -1,3 +1,5 @@
+INSERT INTO `Equipa` (`idEquipa`) VALUES
+(1)
 -- -----------------------------------------------------
 -- 1. Participantes
 -- -----------------------------------------------------
@@ -109,6 +111,3 @@ INSERT INTO `RegistoTempo` (`idRegistoTempo`, `Juiz`, `Inscricao`, `Prova`, `Dur
 -- -----------------------------------------------------
 INSERT INTO `OcorrenciaMedica` (`idOcorrenciaMedica`, `Participante`, `Medico`, `DataHora`, `Descricao`) VALUES
 (1, 1, 1, '2026-05-10 10:45:00', 'Atleta queixou-se de cãibras severas nos gémeos após a estação Sled Pull. Aplicado gelo. Atleta recusou abandono e prosseguiu.');
-
-INSERT INTO `Equipa` (`idEquipa`) VALUES
-(1)
