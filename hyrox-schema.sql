@@ -1,6 +1,5 @@
 CREATE SCHEMA hyrox;
 USE hyrox;
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -78,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `JuizProva` (
   `numStaff` INT UNSIGNED NOT NULL,
   `NivelCertificacao` ENUM('1', '2', '3') NOT NULL,
   PRIMARY KEY (`numStaff`),
-  CONSTRAINT `fk_jp_staff`
+  CONSTRAINT `numStaffJp`
     FOREIGN KEY (`numStaff`)
     REFERENCES `Staff` (`idStaff`)
     ON DELETE NO ACTION
@@ -111,6 +110,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `Equipa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Equipa` (
+  `idEquipa` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`idEquipa`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `Inscrição`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Inscrição` (
@@ -119,18 +127,25 @@ CREATE TABLE IF NOT EXISTS `Inscrição` (
   `Estado` ENUM('Pendente', 'Pago', 'Confirmado') NOT NULL DEFAULT 'Pendente',
   `Categoria` ENUM('Open', 'Pro', 'Doubles', 'Relay') NOT NULL,
   `Heat` INT NULL,
+  `Equipa` INT UNSIGNED NULL,
   PRIMARY KEY (`idInscrição`),
   UNIQUE INDEX `idInscrição_UNIQUE` (`idInscrição` ASC) VISIBLE,
   INDEX `Participante_idx` (`Participante` ASC) VISIBLE,
   INDEX `Heat_idx` (`Heat` ASC) VISIBLE,
-  CONSTRAINT `ParticipanteInscricao`
+  INDEX `Equipa_idx` (`Equipa` ASC) VISIBLE,
+  CONSTRAINT `ParticipanteInsc`
     FOREIGN KEY (`Participante`)
     REFERENCES `Participante` (`idParticipante`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `HeatInscricao`
+  CONSTRAINT `HeatInsc`
     FOREIGN KEY (`Heat`)
     REFERENCES `Heat` (`idHeat`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `EquipaInsc`
+    FOREIGN KEY (`Equipa`)
+    REFERENCES `Equipa` (`idEquipa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -146,6 +161,7 @@ CREATE TABLE IF NOT EXISTS `Pulseira` (
   UNIQUE INDEX `idPulseira_UNIQUE` (`idPulseira` ASC) VISIBLE)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `UsoPulseira`
 -- -----------------------------------------------------
@@ -154,12 +170,12 @@ CREATE TABLE IF NOT EXISTS `UsoPulseira` (
   `Pulseira` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`Inscricao`),
   INDEX `Pulseira_idx` (`Pulseira` ASC) VISIBLE,
-  CONSTRAINT `InscricaoPulseira`
+  CONSTRAINT `InscricaoPuls`
     FOREIGN KEY (`Inscricao`)
     REFERENCES `Inscrição` (`idInscrição`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `PulseiraUso`
+  CONSTRAINT `PulseiraPuls`
     FOREIGN KEY (`Pulseira`)
     REFERENCES `Pulseira` (`idPulseira`)
     ON DELETE NO ACTION
@@ -175,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `Médico` (
   `Cedula` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`numStaff`),
   UNIQUE INDEX `Cedula_UNIQUE` (`Cedula` ASC) VISIBLE,
-  CONSTRAINT `fk_medicon_staff`
+  CONSTRAINT `numStaffMedico`
     FOREIGN KEY (`numStaff`)
     REFERENCES `Staff` (`idStaff`)
     ON DELETE NO ACTION
@@ -193,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `Media` (
   `nrCarteira` VARCHAR(15) NULL,
   PRIMARY KEY (`numStaff`),
   UNIQUE INDEX `numStaff_UNIQUE` (`numStaff` ASC) VISIBLE,
-  CONSTRAINT `fk_media_staff`
+  CONSTRAINT `numStaffMedia`
     FOREIGN KEY (`numStaff`)
     REFERENCES `Staff` (`idStaff`)
     ON DELETE NO ACTION
@@ -213,12 +229,12 @@ CREATE TABLE IF NOT EXISTS `OcorrenciaMedica` (
   PRIMARY KEY (`idOcorrenciaMedica`),
   UNIQUE INDEX `idOcorrenciaMedica_UNIQUE` (`idOcorrenciaMedica` ASC) VISIBLE,
   INDEX `Medico_idx` (`Medico` ASC) VISIBLE,
-  CONSTRAINT `ParticipanteOcorrMed`
+  CONSTRAINT `ParticipanteMed`
     FOREIGN KEY (`Participante`)
     REFERENCES `Participante` (`idParticipante`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `Medico`
+  CONSTRAINT `MedicoMed`
     FOREIGN KEY (`Medico`)
     REFERENCES `Médico` (`numStaff`)
     ON DELETE NO ACTION
@@ -240,12 +256,12 @@ CREATE TABLE IF NOT EXISTS `Pagamento` (
   UNIQUE INDEX `idPagamento_UNIQUE` (`idPagamento` ASC) VISIBLE,
   UNIQUE INDEX `Inscricao_UNIQUE` (`Inscricao` ASC) VISIBLE,
   INDEX `Validou_idx` (`Validou` ASC) VISIBLE,
-  CONSTRAINT `InscricaoPagamento`
+  CONSTRAINT `InscricaoPag`
     FOREIGN KEY (`Inscricao`)
     REFERENCES `Inscrição` (`idInscrição`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `Validou`
+  CONSTRAINT `ValidouPag`
     FOREIGN KEY (`Validou`)
     REFERENCES `Staff` (`idStaff`)
     ON DELETE NO ACTION

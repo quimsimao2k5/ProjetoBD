@@ -76,10 +76,10 @@ INSERT INTO `Heat` (`idHeat`, `Evento`, `HoraPartida`, `HeadJudge`) VALUES
 -- -----------------------------------------------------
 -- 8. Inscrições
 -- -----------------------------------------------------
-INSERT INTO `Inscrição` (`idInscrição`, `Participante`, `Estado`, `Categoria`, `Heat`) VALUES
-(1, 1, 'Confirmado', 'Open', 1), -- João na Heat 1
-(2, 2, 'Confirmado', 'Pro', 1),  -- Maria na Heat 1
-(3, 3, 'Pendente', 'Open', NULL); -- Carlos ainda não pagou, logo não tem Heat
+INSERT INTO `Inscrição` (`idInscrição`, `Participante`, `Estado`, `Categoria`, `Heat`, `Equipa`) VALUES
+(1, 1, 'Confirmado', 'Open', 1,NULL), -- João na Heat 1
+(2, 2, 'Confirmado', 'Pro', 1,NULL),  -- Maria na Heat 1
+(3, 3, 'Pendente', 'Open', NULL,NULL); -- Carlos ainda não pagou, logo não tem Heat
 
 -- -----------------------------------------------------
 -- 9. Entregas de Logística e Pagamentos
