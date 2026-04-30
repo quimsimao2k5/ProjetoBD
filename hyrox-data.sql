@@ -77,8 +77,8 @@ INSERT INTO `Heat` (`idHeat`, `Evento`, `HoraPartida`, `HeadJudge`) VALUES
 -- 8. Inscrições
 -- -----------------------------------------------------
 INSERT INTO `Inscrição` (`idInscrição`, `Participante`, `Estado`, `Categoria`, `Heat`, `Equipa`) VALUES
-(1, 1, 'Confirmado', 'Open', 1,NULL), -- João na Heat 1
-(2, 2, 'Confirmado', 'Pro', 1,NULL),  -- Maria na Heat 1
+(1, 1, 'Confirmado', 'Doubles', 1, 1), -- João na Heat 1
+(2, 2, 'Confirmado', 'Doubles', 1, 1),  -- Maria na Heat 1
 (3, 3, 'Pendente', 'Open', NULL,NULL); -- Carlos ainda não pagou, logo não tem Heat
 
 -- -----------------------------------------------------
@@ -109,3 +109,6 @@ INSERT INTO `RegistoTempo` (`idRegistoTempo`, `Juiz`, `Inscricao`, `Prova`, `Dur
 -- -----------------------------------------------------
 INSERT INTO `OcorrenciaMedica` (`idOcorrenciaMedica`, `Participante`, `Medico`, `DataHora`, `Descricao`) VALUES
 (1, 1, 1, '2026-05-10 10:45:00', 'Atleta queixou-se de cãibras severas nos gémeos após a estação Sled Pull. Aplicado gelo. Atleta recusou abandono e prosseguiu.');
+
+INSERT INTO `Equipa` (`idEquipa`) VALUES
+(1)
