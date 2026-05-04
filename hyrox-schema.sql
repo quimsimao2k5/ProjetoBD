@@ -119,17 +119,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Inscrição`
+-- Table `Inscricao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Inscrição` (
-  `idInscrição` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Inscricao` (
+  `idInscricao` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Participante` INT UNSIGNED NOT NULL,
   `Estado` ENUM('Pendente', 'Pago', 'Confirmado') NOT NULL DEFAULT 'Pendente',
   `Categoria` ENUM('Open', 'Pro', 'Doubles', 'Relay') NOT NULL,
   `Heat` INT NULL,
   `Equipa` INT UNSIGNED NULL,
-  PRIMARY KEY (`idInscrição`),
-  UNIQUE INDEX `idInscrição_UNIQUE` (`idInscrição` ASC) VISIBLE,
+  PRIMARY KEY (`idInscricao`),
+  UNIQUE INDEX `idInscricao_UNIQUE` (`idInscricao` ASC) VISIBLE,
   INDEX `Participante_idx` (`Participante` ASC) VISIBLE,
   INDEX `Heat_idx` (`Heat` ASC) VISIBLE,
   INDEX `Equipa_idx` (`Equipa` ASC) VISIBLE,
@@ -172,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `UsoPulseira` (
   INDEX `Pulseira_idx` (`Pulseira` ASC) VISIBLE,
   CONSTRAINT `InscricaoPuls`
     FOREIGN KEY (`Inscricao`)
-    REFERENCES `Inscrição` (`idInscrição`)
+    REFERENCES `Inscricao` (`idInscricao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `PulseiraPuls`
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `Pagamento` (
   INDEX `Validou_idx` (`Validou` ASC) VISIBLE,
   CONSTRAINT `InscricaoPag`
     FOREIGN KEY (`Inscricao`)
-    REFERENCES `Inscrição` (`idInscrição`)
+    REFERENCES `Inscricao` (`idInscricao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `ValidouPag`
@@ -291,7 +291,7 @@ CREATE TABLE IF NOT EXISTS `RegistoTempo` (
     ON UPDATE NO ACTION,
   CONSTRAINT `InscricaoTempo`
     FOREIGN KEY (`Inscricao`)
-    REFERENCES `Inscrição` (`idInscrição`)
+    REFERENCES `Inscricao` (`idInscricao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `JuizTempo`

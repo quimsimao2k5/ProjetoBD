@@ -5,13 +5,13 @@ CREATE ROLE 'role_admin', 'role_juiz', 'role_medico';
 GRANT ALL PRIVILEGES ON hyrox.* TO 'role_admin';
 
 GRANT SELECT ON hyrox.Participante TO 'role_juiz';
-GRANT SELECT ON hyrox.Inscrição TO 'role_juiz';
+GRANT SELECT ON hyrox.Inscricao TO 'role_juiz';
 GRANT SELECT ON hyrox.Heat TO 'role_juiz';
 GRANT SELECT ON hyrox.Prova TO 'role_juiz';
 GRANT INSERT, UPDATE ON hyrox.RegistoTempo TO 'role_juiz';
 
 GRANT SELECT ON hyrox.Participante TO 'role_medico';
-GRANT SELECT ON hyrox.Inscrição TO 'role_medico';
+GRANT SELECT ON hyrox.Inscricao TO 'role_medico';
 GRANT INSERT, UPDATE ON hyrox.OcorrenciaMedica TO 'role_medico';
 
 CREATE USER 'andre_matos_admin'@'localhost' IDENTIFIED BY 'Admin2026';
