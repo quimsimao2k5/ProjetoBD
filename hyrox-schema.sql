@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS `Participante` (
   `DataNascimento` DATE NOT NULL,
   `Morada` VARCHAR(150) NULL,
   PRIMARY KEY (`idParticipante`),
-  UNIQUE INDEX `idParticipante_UNIQUE` (`idParticipante` ASC) VISIBLE,
   UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
+INDEX `idx_nome` (`Nome`) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS `Evento` (
   `Local` VARCHAR(150) NOT NULL,
   `Inicio` DATE NOT NULL,
   `Fim` DATE NOT NULL,
-  PRIMARY KEY (`idEvento`),
-  UNIQUE INDEX `idEvento_UNIQUE` (`idEvento` ASC) VISIBLE)
+  PRIMARY KEY (`idEvento`))
 ENGINE = InnoDB;
 
 
@@ -49,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `Prova` (
   `OrdemProva` TINYINT UNSIGNED NOT NULL,
   `Métrica` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idProva`),
-  UNIQUE INDEX `idProva_UNIQUE` (`idProva` ASC) VISIBLE,
   UNIQUE INDEX `Nome_UNIQUE` (`Nome` ASC) VISIBLE,
   UNIQUE INDEX `OrdemProva_UNIQUE` (`OrdemProva` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -65,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `Staff` (
   `Email` VARCHAR(100) NOT NULL,
   `Tipo` ENUM('Medico', 'Admin', 'Media', 'Voluntario', 'JuizProva') NOT NULL,
   PRIMARY KEY (`idStaff`),
-  UNIQUE INDEX `idStaff_UNIQUE` (`idStaff` ASC) VISIBLE,
   UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -94,8 +91,8 @@ CREATE TABLE IF NOT EXISTS `Heat` (
   `HoraPartida` DATETIME NOT NULL,
   `HeadJudge` INT UNSIGNED NULL,
   PRIMARY KEY (`idHeat`),
-  UNIQUE INDEX `idHeat_UNIQUE` (`idHeat` ASC) VISIBLE,
   INDEX `HeadJudge_idx` (`HeadJudge` ASC) VISIBLE,
+  INDEX `idx_hora_partida` (`HoraPartida` ASC) VISIBLE,
   CONSTRAINT `EventoHeat`
     FOREIGN KEY (`Evento`)
     REFERENCES `Evento` (`idEvento`)
@@ -129,10 +126,11 @@ CREATE TABLE IF NOT EXISTS `Inscricao` (
   `Heat` INT NULL,
   `Equipa` INT UNSIGNED NULL,
   PRIMARY KEY (`idInscricao`),
-  UNIQUE INDEX `idInscricao_UNIQUE` (`idInscricao` ASC) VISIBLE,
   INDEX `Participante_idx` (`Participante` ASC) VISIBLE,
   INDEX `Heat_idx` (`Heat` ASC) VISIBLE,
-  INDEX `Equipa_idx` (`Equipa` ASC) VISIBLE,
+INDEX `Equipa_idx` (`Equipa` ASC) VISIBLE,
+  INDEX `idx_estado` (`Estado` ASC) VISIBLE,
+  INDEX `idx_categoria` (`Categoria` ASC) VISIBLE,
   CONSTRAINT `ParticipanteInsc`
     FOREIGN KEY (`Participante`)
     REFERENCES `Participante` (`idParticipante`)
@@ -157,8 +155,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Pulseira` (
   `idPulseira` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `Estado` ENUM('Ativa', 'Avariada', 'Extraviada') NOT NULL,
-  PRIMARY KEY (`idPulseira`),
-  UNIQUE INDEX `idPulseira_UNIQUE` (`idPulseira` ASC) VISIBLE)
+  PRIMARY KEY (`idPulseira`))
 ENGINE = InnoDB;
 
 
@@ -208,7 +205,6 @@ CREATE TABLE IF NOT EXISTS `Media` (
   `Acesso` ENUM('Pista', 'Bastidores', 'VIP Zone') NOT NULL,
   `nrCarteira` VARCHAR(15) NULL,
   PRIMARY KEY (`numStaff`),
-  UNIQUE INDEX `numStaff_UNIQUE` (`numStaff` ASC) VISIBLE,
   CONSTRAINT `numStaffMedia`
     FOREIGN KEY (`numStaff`)
     REFERENCES `Staff` (`idStaff`)
@@ -227,7 +223,6 @@ CREATE TABLE IF NOT EXISTS `OcorrenciaMedica` (
   `DataHora` DATETIME NOT NULL,
   `Descricao` TEXT NOT NULL,
   PRIMARY KEY (`idOcorrenciaMedica`),
-  UNIQUE INDEX `idOcorrenciaMedica_UNIQUE` (`idOcorrenciaMedica` ASC) VISIBLE,
   INDEX `Medico_idx` (`Medico` ASC) VISIBLE,
   CONSTRAINT `ParticipanteMed`
     FOREIGN KEY (`Participante`)
@@ -253,7 +248,6 @@ CREATE TABLE IF NOT EXISTS `Pagamento` (
   `Metodo` ENUM('Transferência', 'MBWay', 'Cartão') NOT NULL,
   `Validou` INT UNSIGNED NULL,
   PRIMARY KEY (`idPagamento`),
-  UNIQUE INDEX `idPagamento_UNIQUE` (`idPagamento` ASC) VISIBLE,
   UNIQUE INDEX `Inscricao_UNIQUE` (`Inscricao` ASC) VISIBLE,
   INDEX `Validou_idx` (`Validou` ASC) VISIBLE,
   CONSTRAINT `InscricaoPag`
@@ -280,10 +274,10 @@ CREATE TABLE IF NOT EXISTS `RegistoTempo` (
   `Duracao(ms)` INT UNSIGNED NOT NULL,
   `Penalizacao(ms)` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`idRegistoTempo`),
-  UNIQUE INDEX `idRegistoTempo_UNIQUE` (`idRegistoTempo` ASC) VISIBLE,
   INDEX `Inscricao_idx` (`Inscricao` ASC) VISIBLE,
   INDEX `Juiz_idx` (`Juiz` ASC) VISIBLE,
   UNIQUE INDEX `idx_unico_tempo` (`Prova` ASC, `Inscricao` ASC) VISIBLE,
+INDEX `idx_prova_duracao` (`Prova` ASC, `Duracao(ms)` ASC) VISIBLE,
   CONSTRAINT `ProvaTempo`
     FOREIGN KEY (`Prova`)
     REFERENCES `Prova` (`idProva`)
