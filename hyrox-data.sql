@@ -1,3 +1,4 @@
+Use hyrox;
 INSERT INTO `Equipa` (`idEquipa`) VALUES
 (1);
 -- -----------------------------------------------------
@@ -153,7 +154,7 @@ INSERT INTO `Participante` (`idParticipante`, `Nome`, `Telemóvel`, `Email`, `Da
 (147, 'Guilherme Castro Oliveira', '963866342', 'guilherme.oliveira147@email.pt', '1979-09-07', 'Largo da Alegria, nº 482, Cascais'),
 (148, 'Pedro Gonçalves Silva Castro', '934926935', 'pedro.silva148@email.pt', '1957-01-31', 'Largo das Flores, nº 356, Vila Real'),
 (149, 'Ricardo Marques Gomes', '918481073', 'ricardo.gomes149@email.pt', '1957-02-24', 'Avenida Infante D. Henrique, nº 1220, Caldas da Rainha'),
-(150, 'Inês Barbosa Martins', '922226967', 'inês.martins150@email.pt', '1975-04-13', 'Travessa Sá Carneiro, nº 796, Albufeira')
+(150, 'Inês Barbosa Martins', '922226967', 'inês.martins150@email.pt', '1975-04-13', 'Travessa Sá Carneiro, nº 796, Albufeira');
 
 -- -----------------------------------------------------
 -- 2. Eventos
@@ -311,7 +312,7 @@ INSERT INTO `Pulseira` (`idPulseira`, `Estado`) VALUES
 (222, 'Ativa'),
 (223, 'Ativa'),
 (224, 'Ativa'),
-(225, 'Ativa'),
+(225, 'Extraviada'),
 (226, 'Ativa'),
 (227, 'Ativa'),
 (228, 'Ativa'),
@@ -336,7 +337,7 @@ INSERT INTO `Pulseira` (`idPulseira`, `Estado`) VALUES
 (247, 'Ativa'),
 (248, 'Ativa'),
 (249, 'Ativa'),
-(250, 'Ativa')
+(250, 'Ativa');
 -- -----------------------------------------------------
 -- 5. Staff (A Superclasse)
 -- -----------------------------------------------------
@@ -370,7 +371,7 @@ INSERT INTO `Staff` (`idStaff`, `Nome`, `Telm`, `Email`, `Tipo`) VALUES
 (27, 'Tiago Sousa Mendes', '936417797', 'tiago.mendes27@hyrox.pt', 'JuizProva'),
 (28, 'Diana Sousa Gomes', '922821761', 'diana.gomes28@hyrox.pt', 'JuizProva'),
 (29, 'Sofia Fernandes Ferreira', '965540552', 'sofia.ferreira29@hyrox.pt', 'JuizProva'),
-(30, 'Bruno Lopes Marques', '918148154', 'bruno.marques30@hyrox.pt', 'JuizProva')
+(30, 'Bruno Lopes Marques', '918148154', 'bruno.marques30@hyrox.pt', 'JuizProva');
 -- -----------------------------------------------------
 -- 6. Especializações do Staff
 -- -----------------------------------------------------
@@ -381,7 +382,7 @@ INSERT INTO `Médico` (`numStaff`, `Cedula`) VALUES
 (10, 'OM-33451');
 
 INSERT INTO `JuizProva` (`numStaff`, `NivelCertificacao`) VALUES 
-(15, '3'), -- Head Judge
+(15, '3'),
 (16, '2'),
 (17, '1'),
 (18, '1'),
@@ -401,36 +402,115 @@ INSERT INTO `JuizProva` (`numStaff`, `NivelCertificacao`) VALUES
 INSERT INTO `Media` (`numStaff`, `Orgao`, `Acesso`, `nrCarteira`) VALUES 
 (1, 'Hyrox Global', 'Pista', 'CP-1001'),
 (2, 'Daily Fitness', 'Pista', 'CP-1002'),
-(3, 'Record News', 'Bancada', 'CP-1003'),
+(3, 'Record News', 'Bastidores', 'CP-1003'),
 (4, 'Revista Atletismo', 'Pista', 'CP-1004'),
-(5, 'Freelancer', 'Todo o recinto', 'CP-1005'),
-(6, 'Sport TV', 'Zona de Entrevistas', 'CP-1006');
-
-INSERT INTO `Administrativo` (`numStaff`, `Departamento`) VALUES 
-(11, 'Financeiro'),
-(12, 'Recursos Humanos'),
-(13, 'Logística'),
-(14, 'Direção');
+(5, 'Freelancer', 'VIP Zone', 'CP-1005'),
+(6, 'Sport TV', 'VIP Zone', 'CP-1006');
 
 -- -----------------------------------------------------
 -- 7. Heats (Baterias)
 -- -----------------------------------------------------
 -- A Heat 1 pertence ao Hyrox Lisboa (Evento 1) e tem a Ana (Juiz 2) como Head Judge.
 INSERT INTO `Heat` (`idHeat`, `Evento`, `HoraPartida`, `HeadJudge`) VALUES
-(1, 1, '2026-05-10 10:00:00', 2),
-(2, 1, '2026-05-10 10:30:00', 2);
-(3, 1, '2026-05-10 11:00:00', 2);
-(4, 1, '2026-05-10 11:30:00', 2);
-(5, 1, '2026-05-10 12:00:00', 2);
+(1, 1, '2026-05-10 10:00:00', 15),
+(2, 1, '2026-05-10 10:30:00', 15),
+(3, 1, '2026-05-10 11:00:00', 21),
+(4, 1, '2026-05-10 11:30:00', 21),
+(5, 1, '2026-05-10 12:00:00', 21);
 
 -- -----------------------------------------------------
--- 8. Inscrições
+-- 8. Inscrições (150 Atletas)
 -- -----------------------------------------------------
-INSERT INTO `Inscrição` (`idInscrição`, `Participante`, `Estado`, `Categoria`, `Heat`, `Equipa`) VALUES
-(1, 1, 'Confirmado', 'Doubles', 1, 1), -- João na Heat 1
-(2, 2, 'Confirmado', 'Doubles', 1, 1),  -- Maria na Heat 1
-(3, 3, 'Pendente', 'Open', NULL,NULL); -- Carlos ainda não pagou, logo não tem Heat
+INSERT INTO `Inscricao` (`idInscricao`, `Participante`, `Estado`, `Categoria`, `Heat`, `Equipa`) VALUES
+(1, 1, 'Confirmado', 'Doubles', 1, 1),
+(2, 2, 'Confirmado', 'Doubles', 1, 1),
+(3, 3, 'Confirmado', 'Open', 2, NULL),
+(4, 4, 'Confirmado', 'Pro', 3, NULL),
+(5, 5, 'Confirmado', 'Open', 1, NULL),
+(6, 6, 'Confirmado', 'Open', 4, NULL),
+(7, 7, 'Confirmado', 'Pro', 5, NULL),
+(8, 8, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(9, 9, 'Confirmado', 'Open', 2, NULL),
+(10, 10, 'Confirmado', 'Open', 3, NULL),
+(11, 11, 'Confirmado', 'Pro', 1, NULL),
+(12, 12, 'Confirmado', 'Open', 4, NULL),
+(13, 13, 'Confirmado', 'Open', 5, NULL),
+(14, 14, 'Confirmado', 'Pro', 2, NULL),
+(15, 15, 'Confirmado', 'Open', 3, NULL),
+(16, 16, 'Confirmado', 'Open', 1, NULL),
+(17, 17, 'Confirmado', 'Pro', 4, NULL),
+(18, 18, 'Confirmado', 'Open', 5, NULL),
+(19, 19, 'Confirmado', 'Open', 2, NULL),
+(20, 20, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(21, 21, 'Confirmado', 'Pro', 3, NULL),
+(22, 22, 'Confirmado', 'Open', 1, NULL),
+(23, 23, 'Confirmado', 'Open', 4, NULL),
+(24, 24, 'Confirmado', 'Pro', 5, NULL),
+(25, 25, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(26, 26, 'Pendente', 'Pro', NULL, NULL),  -- Sem Pulseira
+(27, 27, 'Confirmado', 'Open', 2, NULL),
+(28, 28, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(29, 29, 'Confirmado', 'Open', 3, NULL),
+(30, 30, 'Confirmado', 'Pro', 1, NULL),
+(31, 31, 'Confirmado', 'Open', 4, NULL),
+(32, 32, 'Confirmado', 'Open', 5, NULL),
+(33, 33, 'Confirmado', 'Pro', 2, NULL),
+(34, 34, 'Confirmado', 'Open', 3, NULL),
+(35, 35, 'Confirmado', 'Open', 1, NULL),
+(36, 36, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(37, 37, 'Confirmado', 'Pro', 4, NULL),
+(38, 38, 'Confirmado', 'Open', 5, NULL),
+(39, 39, 'Confirmado', 'Open', 2, NULL),
+(40, 40, 'Confirmado', 'Pro', 3, NULL),
+(41, 41, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(42, 42, 'Confirmado', 'Open', 1, NULL),
+(43, 43, 'Confirmado', 'Open', 4, NULL),
+(44, 44, 'Confirmado', 'Pro', 5, NULL),
+(45, 45, 'Confirmado', 'Open', 2, NULL),
+(46, 46, 'Confirmado', 'Open', 3, NULL),
+(47, 47, 'Pendente', 'Pro', NULL, NULL),  -- Sem Pulseira
+(48, 48, 'Pendente', 'Open', NULL, NULL), -- Sem Pulseira
+(49, 49, 'Confirmado', 'Open', 1, NULL),
+(50, 50, 'Confirmado', 'Pro', 4, NULL);
 
+-- (Nota de Engenharia: Para não exceder o limite de caracteres do Workbench, 
+-- inseri os primeiros 50. Podes copiar o bloco abaixo para inserir do 51 ao 150).
+
+INSERT INTO `Inscricao` (`idInscricao`, `Participante`, `Estado`, `Categoria`, `Heat`, `Equipa`) VALUES
+(51, 51, 'Confirmado', 'Open', 5, NULL), (52, 52, 'Confirmado', 'Open', 2, NULL), (53, 53, 'Confirmado', 'Pro', 3, NULL),
+(54, 54, 'Confirmado', 'Open', 1, NULL), (55, 55, 'Confirmado', 'Open', 4, NULL), (56, 56, 'Confirmado', 'Pro', 5, NULL),
+(57, 57, 'Confirmado', 'Open', 2, NULL), (58, 58, 'Confirmado', 'Open', 3, NULL), (59, 59, 'Confirmado', 'Pro', 1, NULL),
+(60, 60, 'Confirmado', 'Open', 4, NULL), (61, 61, 'Confirmado', 'Open', 5, NULL), (62, 62, 'Confirmado', 'Pro', 2, NULL),
+(63, 63, 'Confirmado', 'Open', 3, NULL), (64, 64, 'Confirmado', 'Open', 1, NULL), (65, 65, 'Confirmado', 'Pro', 4, NULL),
+(66, 66, 'Confirmado', 'Open', 5, NULL), (67, 67, 'Confirmado', 'Open', 2, NULL), (68, 68, 'Confirmado', 'Pro', 3, NULL),
+(69, 69, 'Confirmado', 'Open', 1, NULL), (70, 70, 'Confirmado', 'Open', 4, NULL), (71, 71, 'Confirmado', 'Pro', 5, NULL),
+(72, 72, 'Confirmado', 'Open', 2, NULL), (73, 73, 'Pendente', 'Open', NULL, NULL), (74, 74, 'Confirmado', 'Pro', 3, NULL),
+(75, 75, 'Confirmado', 'Open', 1, NULL), (76, 76, 'Confirmado', 'Open', 4, NULL), (77, 77, 'Pendente', 'Pro', NULL, NULL),
+(78, 78, 'Confirmado', 'Open', 5, NULL), (79, 79, 'Confirmado', 'Open', 2, NULL), (80, 80, 'Confirmado', 'Pro', 3, NULL),
+(81, 81, 'Confirmado', 'Open', 1, NULL), (82, 82, 'Confirmado', 'Open', 4, NULL), (83, 83, 'Confirmado', 'Pro', 5, NULL),
+(84, 84, 'Confirmado', 'Open', 2, NULL), (85, 85, 'Confirmado', 'Open', 3, NULL), (86, 86, 'Confirmado', 'Pro', 1, NULL),
+(87, 87, 'Confirmado', 'Open', 4, NULL), (88, 88, 'Confirmado', 'Open', 5, NULL), (89, 89, 'Confirmado', 'Pro', 2, NULL),
+(90, 90, 'Confirmado', 'Open', 3, NULL), (91, 91, 'Confirmado', 'Open', 1, NULL), (92, 92, 'Confirmado', 'Pro', 4, NULL),
+(93, 93, 'Confirmado', 'Open', 5, NULL), (94, 94, 'Pendente', 'Open', NULL, NULL), (95, 95, 'Pendente', 'Pro', NULL, NULL),
+(96, 96, 'Confirmado', 'Open', 2, NULL), (97, 97, 'Confirmado', 'Open', 3, NULL), (98, 98, 'Confirmado', 'Pro', 1, NULL),
+(99, 99, 'Confirmado', 'Open', 4, NULL), (100, 100, 'Confirmado', 'Open', 5, NULL), (101, 101, 'Confirmado', 'Pro', 2, NULL),
+(102, 102, 'Confirmado', 'Open', 3, NULL), (103, 103, 'Confirmado', 'Open', 1, NULL), (104, 104, 'Confirmado', 'Pro', 4, NULL),
+(105, 105, 'Pendente', 'Open', NULL, NULL), (106, 106, 'Confirmado', 'Open', 5, NULL), (107, 107, 'Confirmado', 'Pro', 2, NULL),
+(108, 108, 'Confirmado', 'Open', 3, NULL), (109, 109, 'Confirmado', 'Open', 1, NULL), (110, 110, 'Confirmado', 'Pro', 4, NULL),
+(111, 111, 'Confirmado', 'Open', 5, NULL), (112, 112, 'Confirmado', 'Open', 2, NULL), (113, 113, 'Confirmado', 'Pro', 3, NULL),
+(114, 114, 'Confirmado', 'Open', 1, NULL), (115, 115, 'Confirmado', 'Open', 4, NULL), (116, 116, 'Pendente', 'Pro', NULL, NULL),
+(117, 117, 'Confirmado', 'Open', 5, NULL), (118, 118, 'Pendente', 'Open', NULL, NULL), (119, 119, 'Confirmado', 'Pro', 2, NULL),
+(120, 120, 'Confirmado', 'Open', 3, NULL), (121, 121, 'Confirmado', 'Open', 1, NULL), (122, 122, 'Confirmado', 'Pro', 4, NULL),
+(123, 123, 'Confirmado', 'Open', 5, NULL), (124, 124, 'Confirmado', 'Open', 2, NULL), (125, 125, 'Confirmado', 'Pro', 3, NULL),
+(126, 126, 'Confirmado', 'Open', 1, NULL), (127, 127, 'Confirmado', 'Open', 4, NULL), (128, 128, 'Confirmado', 'Pro', 5, NULL),
+(129, 129, 'Confirmado', 'Open', 2, NULL), (130, 130, 'Confirmado', 'Open', 3, NULL), (131, 131, 'Pendente', 'Pro', NULL, NULL),
+(132, 132, 'Confirmado', 'Open', 1, NULL), (133, 133, 'Confirmado', 'Open', 4, NULL), (134, 134, 'Pendente', 'Open', NULL, NULL),
+(135, 135, 'Confirmado', 'Pro', 5, NULL), (136, 136, 'Confirmado', 'Open', 2, NULL), (137, 137, 'Pendente', 'Open', NULL, NULL),
+(138, 138, 'Confirmado', 'Pro', 3, NULL), (139, 139, 'Confirmado', 'Open', 1, NULL), (140, 140, 'Confirmado', 'Open', 4, NULL),
+(141, 141, 'Confirmado', 'Pro', 5, NULL), (142, 142, 'Confirmado', 'Open', 2, NULL), (143, 143, 'Confirmado', 'Open', 3, NULL),
+(144, 144, 'Pendente', 'Pro', NULL, NULL), (145, 145, 'Confirmado', 'Open', 1, NULL), (146, 146, 'Confirmado', 'Open', 4, NULL),
+(147, 147, 'Confirmado', 'Pro', 5, NULL), (148, 148, 'Confirmado', 'Open', 2, NULL), (149, 149, 'Confirmado', 'Open', 3, NULL),
+(150, 150, 'Confirmado', 'Pro', 1, NULL);
 -- -----------------------------------------------------
 -- 9. Entregas de Logística e Pagamentos
 -- -----------------------------------------------------
@@ -544,7 +624,7 @@ INSERT INTO `UsoPulseira` (`Inscricao`, `Pulseira`) VALUES
 (122, 222),
 (123, 223),
 (124, 224),
-(125, 225),
+(125, 101),
 (126, 226),
 (127, 227),
 (128, 228),
@@ -567,26 +647,180 @@ INSERT INTO `UsoPulseira` (`Inscricao`, `Pulseira`) VALUES
 (149, 249),
 (150, 250);
 
--- Registar os pagamentos
-INSERT INTO `Pagamento` (`idPagamento`, `Inscricao`, `Data`, `Montante`, `Metodo`, `Validou`) VALUES
-(1, 1, '2026-03-01 14:30:00', 85.00, 'MBWay', NULL), -- Automático, sem validação humana
-(2, 2, '2026-03-02 09:15:00', 105.00, 'Transferência', 2); -- Validado manualmente por um admin/staff
+-- -----------------------------------------------------
+-- 9.2. Pagamentos Adicionais
+-- -----------------------------------------------------
 
+INSERT INTO `Pagamento` (`idPagamento`, `Inscricao`, `Data`, `Montante`, `Metodo`, `Validou`) VALUES
+-- Pagamentos Manuais (Transferência Bancária - Requerem ID de quem Validou)
+(1, 1, '2026-03-03 10:20:00', 85.00, 'Transferência', 11),
+(2, 2, '2026-03-03 10:20:00', 85.00, 'Transferência', 11),
+(3, 3, '2026-03-03 10:20:00', 85.00, 'Transferência', 11),
+(4, 4, '2026-03-04 11:45:00', 85.00, 'Transferência', 12),
+(5, 7, '2026-03-05 09:30:00', 85.00, 'Transferência', 13),
+(6, 11, '2026-03-10 14:15:00', 85.00, 'Transferência', 14),
+(7, 14, '2026-03-12 16:50:00', 85.00, 'Transferência', 11),
+(8, 21, '2026-03-15 10:05:00', 85.00, 'Transferência', 12),
+(9, 24, '2026-03-18 11:20:00', 85.00, 'Transferência', 13),
+
+-- Pagamentos Automáticos (MBWay / Cartão - Validou fica NULL)
+(10, 5, '2026-03-06 18:30:00', 85.00, 'MBWay', NULL),
+(11, 6, '2026-03-07 20:15:00', 85.00, 'Cartão', NULL),
+(12, 9, '2026-03-08 22:40:00', 85.00, 'MBWay', NULL),
+(13, 10, '2026-03-09 08:10:00', 85.00, 'Cartão', NULL),
+(14, 12, '2026-03-11 13:25:00', 85.00, 'MBWay', NULL),
+(15, 13, '2026-03-11 19:45:00', 85.00, 'MBWay', NULL),
+(16, 15, '2026-03-13 21:00:00', 85.00, 'Cartão', NULL),
+(17, 16, '2026-03-14 09:30:00', 85.00, 'MBWay', NULL),
+(18, 17, '2026-03-14 11:15:00', 85.00, 'MBWay', NULL),
+(19, 18, '2026-03-16 14:50:00', 85.00, 'Cartão', NULL),
+(20, 19, '2026-03-17 17:20:00', 85.00, 'MBWay', NULL),
+(21, 22, '2026-03-19 20:05:00', 85.00, 'Cartão', NULL),
+(22, 23, '2026-03-20 23:10:00', 85.00, 'MBWay', NULL),
+(23, 27, '2026-03-22 07:45:00', 85.00, 'MBWay', NULL),
+(24, 29, '2026-03-25 12:30:00', 85.00, 'Cartão', NULL),
+(25, 30, '2026-03-26 15:40:00', 85.00, 'MBWay', NULL),
+(26, 31, '2026-03-27 18:55:00', 85.00, 'MBWay', NULL),
+(27, 32, '2026-03-28 21:10:00', 85.00, 'Cartão', NULL),
+(28, 33, '2026-03-30 08:25:00', 85.00, 'MBWay', NULL),
+(29, 34, '2026-04-02 10:40:00', 85.00, 'MBWay', NULL),
+(30, 35, '2026-04-05 14:15:00', 85.00, 'Cartão', NULL),
+(31, 37, '2026-04-08 16:50:00', 85.00, 'MBWay', NULL),
+(32, 38, '2026-04-10 19:20:00', 85.00, 'MBWay', NULL),
+(33, 39, '2026-04-12 22:05:00', 85.00, 'Cartão', NULL),
+(34, 40, '2026-04-15 09:30:00', 85.00, 'MBWay', NULL),
+(35, 42, '2026-04-18 11:45:00', 85.00, 'MBWay', NULL),
+(36, 43, '2026-04-20 13:10:00', 85.00, 'Cartão', NULL),
+(37, 44, '2026-04-22 15:25:00', 85.00, 'MBWay', NULL),
+(38, 45, '2026-04-25 18:40:00', 85.00, 'MBWay', NULL),
+(39, 46, '2026-04-28 20:55:00', 85.00, 'Cartão', NULL),
+(40, 49, '2026-05-02 10:10:00', 85.00, 'MBWay', NULL),
+(41, 50, '2026-05-05 12:35:00', 85.00, 'MBWay', NULL);
 -- -----------------------------------------------------
 -- 10. Registo de Tempos (A tabela associativa)
 -- -----------------------------------------------------
--- Tempos registados em milissegundos
-INSERT INTO `RegistoTempo` (`idRegistoTempo`, `Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
-(1, 3, 1, 1, 245000, 0),      -- João no SkiErg validado pelo Rui (sem penalização)
-(2, 3, 2, 1, 220000, 0),      -- Maria no SkiErg validada pelo Rui (sem penalização)
-(3, 2, 1, 2, 180000, 30000),  -- João no Sled Push validado pela Ana (30s de penalização)
-(4, 2, 2, 2, 165000, 0);      -- Maria no Sled Push validada pela Ana
+
+-- Atleta 1 (Diogo - Doubles)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(15, 1, 1, 240000, 0),     -- Corrida1 (4 mins)
+(16, 1, 2, 215000, 0),     -- SkiErg
+(17, 1, 3, 250000, 0),     -- Corrida2
+(18, 1, 4, 180000, 30000), -- Sled Push (Com 30 seg de penalização por má postura)
+(19, 1, 5, 260000, 0),     -- Corrida3
+(20, 1, 6, 195000, 0),     -- Sled Pull
+(15, 1, 7, 245000, 0),     -- Corrida4
+(16, 1, 8, 210000, 0),     -- Burpee Broad Jumps
+(17, 1, 9, 255000, 0),     -- Corrida5
+(18, 1, 10, 230000, 0),    -- Rowing
+(19, 1, 11, 265000, 0),    -- Corrida6
+(20, 1, 12, 160000, 0),    -- Farmers Carry
+(15, 1, 13, 270000, 0),    -- Corrida7
+(16, 1, 14, 205000, 0),    -- Sandbag Lunges
+(17, 1, 15, 280000, 0),    -- Corrida8
+(18, 1, 16, 290000, 0);    -- Wall Balls
+
+-- Atleta 2 (Samuel - O parceiro do Diogo)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(15, 2, 1, 242000, 0), (16, 2, 2, 220000, 0), (17, 2, 3, 248000, 0), (18, 2, 4, 185000, 0), 
+(19, 2, 5, 258000, 0), (20, 2, 6, 190000, 0), (15, 2, 7, 242000, 0), (16, 2, 8, 205000, 0), 
+(17, 2, 9, 250000, 0), (18, 2, 10, 225000, 0), (19, 2, 11, 260000, 0), (20, 2, 12, 155000, 0), 
+(15, 2, 13, 265000, 0), (16, 2, 14, 200000, 0), (17, 2, 15, 275000, 0), (18, 2, 16, 285000, 0);
+
+-- Atleta 4 (Miguel - Categoria PRO - Fez a prova mais rápido)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(15, 4, 1, 195000, 0), (16, 4, 2, 190000, 0), (17, 4, 3, 200000, 0), (18, 4, 4, 150000, 0), 
+(19, 4, 5, 205000, 0), (20, 4, 6, 145000, 0), (15, 4, 7, 210000, 0), (16, 4, 8, 180000, 0), 
+(17, 4, 9, 215000, 0), (18, 4, 10, 195000, 0), (19, 4, 11, 220000, 0), (20, 4, 12, 130000, 0), 
+(15, 4, 13, 225000, 0), (16, 4, 14, 175000, 0), (17, 4, 15, 230000, 0), (18, 4, 16, 210000, 60000); -- Penalização forte nos Wall Balls!
+
+-- Atleta 5 (Vasco - Categoria OPEN)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(15, 5, 1, 260000, 0), (16, 5, 2, 240000, 0), (17, 5, 3, 270000, 0), (18, 5, 4, 210000, 0), 
+(19, 5, 5, 280000, 0), (20, 5, 6, 220000, 0), (15, 5, 7, 290000, 0), (16, 5, 8, 235000, 0), 
+(17, 5, 9, 300000, 0), (18, 5, 10, 250000, 0), (19, 5, 11, 310000, 0), (20, 5, 12, 190000, 0), 
+(15, 5, 13, 320000, 0), (16, 5, 14, 240000, 0), (17, 5, 15, 330000, 0), (18, 5, 16, 310000, 0);
+
+-- Atleta 6 (Jorge - Categoria OPEN - Ritmo Médio/Regular)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(21, 6, 1, 270000, 0),     -- Corrida1 (4m30s)
+(22, 6, 2, 255000, 0),     -- SkiErg (4m15s)
+(23, 6, 3, 280000, 0),     -- Corrida2 
+(24, 6, 4, 150000, 0),     -- Sled Push (2m30s)
+(25, 6, 5, 290000, 0),     -- Corrida3
+(26, 6, 6, 160000, 0),     -- Sled Pull (2m40s)
+(27, 6, 7, 295000, 0),     -- Corrida4
+(28, 6, 8, 195000, 0),     -- Burpee Broad Jumps (3m15s)
+(21, 6, 9, 305000, 0),     -- Corrida5
+(22, 6, 10, 260000, 0),    -- Rowing (4m20s)
+(23, 6, 11, 315000, 0),    -- Corrida6
+(24, 6, 12, 135000, 0),    -- Farmers Carry (2m15s)
+(25, 6, 13, 320000, 0),    -- Corrida7
+(26, 6, 14, 220000, 30000),-- Sandbag Lunges (Com 30s de penalização)
+(27, 6, 15, 335000, 0),    -- Corrida8 (Fadiga acumulada)
+(28, 6, 16, 275000, 0);    -- Wall Balls (4m35s)
+
+-- Atleta 7 (Erica - Categoria PRO - Ritmo Acelerado)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(21, 7, 1, 215000, 0),     -- Corrida1 (3m35s)
+(22, 7, 2, 225000, 0),     -- SkiErg (3m45s)
+(23, 7, 3, 220000, 0),     -- Corrida2 
+(24, 7, 4, 110000, 0),     -- Sled Push (1m50s)
+(25, 7, 5, 230000, 0),     -- Corrida3
+(26, 7, 6, 125000, 0),     -- Sled Pull (2m05s)
+(27, 7, 7, 235000, 0),     -- Corrida4
+(28, 7, 8, 145000, 0),     -- Burpee Broad Jumps (2m25s)
+(21, 7, 9, 240000, 0),     -- Corrida5
+(22, 7, 10, 235000, 0),    -- Rowing (3m55s)
+(23, 7, 11, 245000, 0),    -- Corrida6
+(24, 7, 12, 105000, 0),    -- Farmers Carry (1m45s)
+(25, 7, 13, 255000, 0),    -- Corrida7
+(26, 7, 14, 180000, 0),    -- Sandbag Lunges (3m00s)
+(27, 7, 15, 260000, 0),    -- Corrida8 
+(28, 7, 16, 215000, 0);    -- Wall Balls (3m35s)
+
+-- Atleta 9 (Guilherme - Categoria OPEN - Forte nas estações, mais lento na corrida)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(21, 9, 1, 310000, 0),     -- Corrida1 (5m10s)
+(22, 9, 2, 230000, 0),     -- SkiErg (3m50s)
+(23, 9, 3, 315000, 0),     -- Corrida2 
+(24, 9, 4, 120000, 0),     -- Sled Push (2m00s)
+(25, 9, 5, 320000, 0),     -- Corrida3
+(26, 9, 6, 130000, 0),     -- Sled Pull (2m10s)
+(27, 9, 7, 330000, 0),     -- Corrida4
+(28, 9, 8, 160000, 0),     -- Burpee Broad Jumps (2m40s)
+(21, 9, 9, 340000, 0),     -- Corrida5
+(22, 9, 10, 245000, 0),    -- Rowing (4m05s)
+(23, 9, 11, 350000, 0),    -- Corrida6
+(24, 9, 12, 115000, 0),    -- Farmers Carry (1m55s)
+(25, 9, 13, 360000, 0),    -- Corrida7
+(26, 9, 14, 185000, 0),    -- Sandbag Lunges (3m05s)
+(27, 9, 15, 370000, 0),    -- Corrida8 
+(28, 9, 16, 230000, 60000);-- Wall Balls (Penalização pesada de 1 minuto)
+
+-- Atleta 11 (Letícia - Categoria PRO - Ritmo Constante)
+INSERT INTO `RegistoTempo` (`Juiz`, `Inscricao`, `Prova`, `Duracao(ms)`, `Penalizacao(ms)`) VALUES
+(21, 11, 1, 230000, 0),    -- Corrida1 
+(22, 11, 2, 235000, 0),    -- SkiErg 
+(23, 11, 3, 235000, 0),    -- Corrida2 
+(24, 11, 4, 125000, 0),    -- Sled Push 
+(25, 11, 5, 240000, 0),    -- Corrida3
+(26, 11, 6, 140000, 0),    -- Sled Pull 
+(27, 11, 7, 240000, 0),    -- Corrida4
+(28, 11, 8, 165000, 0),    -- Burpee Broad Jumps 
+(21, 11, 9, 245000, 0),    -- Corrida5
+(22, 11, 10, 240000, 0),   -- Rowing 
+(23, 11, 11, 250000, 0),   -- Corrida6
+(24, 11, 12, 120000, 0),   -- Farmers Carry 
+(25, 11, 13, 255000, 0),   -- Corrida7
+(26, 11, 14, 190000, 0),   -- Sandbag Lunges 
+(27, 11, 15, 260000, 0),   -- Corrida8 
+(28, 11, 16, 220000, 0);   -- Wall Balls
 
 -- -----------------------------------------------------
 -- 11. Ocorrências Médicas
 -- -----------------------------------------------------
 INSERT INTO `OcorrenciaMedica` (`idOcorrenciaMedica`, `Participante`, `Medico`, `DataHora`, `Descricao`) VALUES
-(1, 1, 1, '2026-05-10 10:45:00', 'Atleta queixou-se de cãibras severas nos gémeos após a estação Sled Pull. Aplicado gelo. Atleta recusou abandono e prosseguiu.');
+(1, 1, 7, '2026-05-10 10:45:00', 'Atleta queixou-se de cãibras severas nos gémeos após a estação Sled Pull. Aplicado gelo. Atleta recusou abandono e prosseguiu.'),
 (2, 146, 7, '2026-05-10 13:15:00', 'Atleta apresentou sinais de exaustão por calor e desidratação leve. Administrada solução eletrolítica e repouso de 15 min.'),
 (3, 45, 7, '2026-05-10 11:00:00', 'Entorse leve no tornozelo direito durante a corrida entre estações. Realizada ligadura funcional. Atleta optou por continuar.'),
 (4, 20, 8, '2026-05-10 12:15:00', 'Queixa de dor aguda na zona lombar após o Sled Push. Avaliação rápida não indicou lesão estrutural. Recomendado abrandar o ritmo.'),
