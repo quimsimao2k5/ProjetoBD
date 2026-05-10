@@ -1,5 +1,5 @@
-
--- Consulta de atletas por bateria de partida
+Use hyrox;
+-- Consulta de atletas por bateria de partida - Pessoas que vão começar num certo horário
 
 SELECT P.Nome
 FROM Participante P
@@ -11,7 +11,7 @@ WHERE E.Nome = 'Hyrox Lisboa 2026'
   AND I.Estado = 'Confirmado';
   
   
--- Consulta de agregação simples de penalizações
+-- Consulta de agregação simples de penalizações - Total de penalizações numa estação
 
 SELECT SUM(RT.`Penalizacao(ms)`) AS Total_Penalizacoes_MS
 FROM RegistoTempo RT
@@ -19,7 +19,7 @@ JOIN Prova Pr ON RT.Prova = Pr.idProva
 WHERE Pr.Nome = 'Sled Push';
 
 
--- Consulta de auditabilidade de oficiais de prova
+-- Consulta de auditabilidade de oficiais de prova - Quem avaliou a pessoa x
 
 SELECT DISTINCT S.Nome AS Nome_Juiz
 FROM Staff S
